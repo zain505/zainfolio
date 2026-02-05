@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.wrapper-skills {
+  width: 100%;
+  margin-bottom: 80px;
+  overflow: hidden;
+}
+
+.inner-wrapper-skills {
+  width: calc(100% - (var(--gutter) * 2));
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.skills {
+  text-align: center;
+  font-size: clamp(24px, 5vw, 56px);
+  font-weight: 600;
+  color: white;
+}
+
+.neon-line {
+  border: none;
+  height: 3px;
+  width: 0;
+  margin: 18px 0;
+  background: #00eaff;
+  box-shadow: 0 0 10px #00eaff;
+  animation: neonGrow 1.2s forwards;
+}
+
+@keyframes neonGrow {
+  from { width: 0; opacity: 0.3; }
+  to   { width: 100%; opacity: 1; }
+}
+
+.content-skills {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: auto;
+}
+
+.code-robot {
+  width: 100%;
+  min-height: 220px;
+  /* border: 1px solid rgb(23, 23, 23); */
+  background-image: url('/code.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.flashing-skills-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid rgb(23, 23, 23); */
+  min-height: 280px;
+}
+
+.flashed-area {
+  height: 260px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.text {
+  color: #00eaff;
+  font-size: 12px;
+  text-shadow:
+    0 0 5px #00eaff,
+    0 0 15px #00eaff,
+    0 0 30px #00eaff;
+}
+
+.hire-me {
+  margin: 22px auto 0;
+  background-color: yellow;
+  height: 48px;
+  width: 100%;
+  max-width: 420px;
+  color: black;
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .content-skills {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 520px;
+  }
+  .code-robot { flex: 1; min-height: auto; }
+  .flashing-skills-area { flex: 1; min-height: auto; }
+  .flashed-area { height: 70%; width: 70%; }
+  .text { font-size: 13px; }
+  .hire-me { width: 60%; max-width: none; }
+}
+
+@media (min-width: 1024px) {
+  .wrapper-skills { margin-bottom: 120px; }
+  .content-skills { height: 600px; }
+  .hire-me { width: 25%; font-size: 20px; height: 50px; }
+}

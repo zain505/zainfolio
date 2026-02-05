@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/* Mobile-first */
+.hero-wrapper {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.upper-layout {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.60);
+}
+
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--gutter);
+}
+
+.inner > div {
+  max-width: var(--container-max);
+}
+
+.line {
+  width: 8px;
+  background-color: yellow;
+  margin-right: 10px;
+  height: 36%;
+  animation-name: heroLineGrow;
+  animation-duration: 900ms;
+  animation-iteration-count: 1;
+}
+
+@keyframes heroLineGrow {
+  from { height: 0%; }
+  to   { height: 36%; }
+}
+
+.hello {
+  font-size: clamp(20px, 4.5vw, 44px);
+  font-weight: 400;
+  color: white;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.tech {
+  font-size: clamp(32px, 7vw, 96px);
+  font-weight: 600;
+  color: white;
+  margin: 8px 0 0;
+  line-height: 1.05;
+}
+
+.passion {
+  font-size: clamp(18px, 4.5vw, 44px);
+  font-weight: 400;
+  color: white;
+  margin: 10px 0 0;
+  line-height: 1.2;
+}
+
+.scroll {
+  height: 44px;
+  width: 44px;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  transform: rotate(90deg);
+  animation: heroScrollBounce 3s infinite;
+  cursor: pointer;
+  z-index: 10;
+}
+
+@keyframes heroScrollBounce {
+  0%   { bottom: 28px; }
+  50%  { bottom: 14px; }
+  100% { bottom: 28px; }
+}
+
+/* Small tablets */
+@media (min-width: 600px) {
+  .scroll {
+    height: 50px;
+    width: 50px;
+    right: 28px;
+  }
+  .line { width: 10px; }
+}
+
+/* Laptops/desktops */
+@media (min-width: 1024px) {
+  .hero-wrapper { margin-bottom: 120px; }
+  .inner { justify-content: flex-start; }
+  .inner > div { padding-left: 80px; }
+  .line {
+    height: 55%;
+    animation-duration: 1.2s;
+  }
+  @keyframes heroLineGrow {
+    from { height: 0%; }
+    to   { height: 55%; }
+  }
+  .scroll { right: 50px; }
+}
+
+/* Large desktops */
+@media (min-width: 1600px) {
+  .hello { font-size: 56px; }
+  .tech { font-size: 140px; }
+}

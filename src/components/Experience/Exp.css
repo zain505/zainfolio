@@ -1,0 +1,185 @@
+/* ExperienceSection.css */
+
+:root {
+  --exp-bg: #0b0b0c;
+  --exp-card: rgba(18, 18, 19, 0.86);
+  --exp-card-2: rgba(22, 22, 24, 0.72);
+  --exp-border: rgba(255, 255, 255, 0.07);
+  --exp-soft: rgba(255, 255, 255, 0.10);
+  --exp-text: rgba(255, 255, 255, 0.92);
+  --exp-muted: rgba(255, 255, 255, 0.62);
+  --exp-dim: rgba(255, 255, 255, 0.42);
+}
+
+.expSection {
+  padding: clamp(16px, 4vw, 40px);
+  background: transparent;
+  margin-bottom: 120px;
+}
+
+.expFrame {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: clamp(14px, 3.5vw, 28px);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(0, 0, 0, 0.25);
+
+}
+
+.expCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: clamp(18px, 4vw, 28px);
+  background:
+    radial-gradient(900px 420px at 40% 10%, rgba(255, 255, 255, 0.08), transparent 55%),
+    radial-gradient(700px 520px at 90% 30%, rgba(255, 255, 255, 0.05), transparent 60%),
+    linear-gradient(180deg, var(--exp-card), var(--exp-card-2));
+  border: 1px solid var(--exp-border);
+  box-shadow:
+    0 16px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Subtle vignette / depth */
+.expCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 120% at 50% 0%, transparent 35%, rgba(0, 0, 0, 0.45) 100%);
+  opacity: 0.85;
+}
+
+.expHeader,
+.expList {
+  position: relative;
+  z-index: 1;
+}
+
+.expHeader {
+  margin-bottom: clamp(14px, 2.8vw, 22px);
+}
+
+.expTitle {
+  margin: 0;
+  font-size: clamp(20px, 2.8vw, 32px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--exp-text);
+  font-weight: 650;
+}
+
+.expTitle span {
+  color: var(--exp-muted);
+  font-weight: 600;
+}
+
+/* List */
+.expList {
+  display: grid;
+  gap: 12px;
+}
+
+/* Row (desktop/tablet) */
+.expRow {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+}
+
+.expRow:not(.isFeatured) {
+  background: rgba(0, 0, 0, 0.10);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.expRow.isFeatured {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.expPeriod {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--exp-dim);
+  white-space: nowrap;
+}
+
+/* Right side content */
+.expBody {
+  display: grid;
+  gap: 4px;
+}
+
+.expCompany {
+  font-size: 14px;
+  color: var(--exp-text);
+  font-weight: 600;
+}
+
+.expRole {
+  font-size: 12px;
+  color: var(--exp-muted);
+}
+
+/* Hover/focus (nice on desktop) */
+.expRow:hover {
+  border-color: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.expRow:focus-within {
+  outline: 2px solid rgba(255, 255, 255, 0.14);
+  outline-offset: 2px;
+}
+
+/* ---------------------------
+   Mobile responsiveness
+   --------------------------- */
+@media (max-width: 640px) {
+  .expFrame {
+    border-radius: 16px;
+    padding: 12px;
+  }
+
+  .expCard {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  /* Stack period above content */
+  .expRow {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px 12px;
+  }
+
+  .expPeriod {
+    font-size: 11px;
+  }
+
+  .expCompany {
+    font-size: 15px;
+  }
+
+  .expRole {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .expCard {
+    padding: 14px;
+  }
+
+  .expRow {
+    padding: 12px 10px;
+  }
+}

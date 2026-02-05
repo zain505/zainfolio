@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.wrapper-about {
+  width: 100%;
+  height: auto;
+  margin-bottom: 80px;
+}
+
+.inner-wrapper-about {
+  width: calc(100% - (var(--gutter) * 2));
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.about-me {
+  text-align: center;
+  font-size: clamp(24px, 5vw, 56px);
+  font-weight: 600;
+  color: white;
+}
+
+.about-me-text {
+  text-align: center;
+  font-size: clamp(15px, 2.2vw, 22px);
+  font-weight: 300;
+  color: white;
+  text-transform: capitalize;
+  line-height: 1.7;
+  margin-top: 14px;
+}
+
+.neon-line {
+  border: none;
+  height: 3px;
+  width: 0;
+  margin: 18px 0;
+  background: #00eaff;
+  box-shadow: 0 0 10px #00eaff;
+  animation: neonGrow 1.2s forwards;
+}
+
+@keyframes neonGrow {
+  from { width: 0; opacity: 0.3; }
+  to   { width: 100%; opacity: 1; }
+}
+
+@media (min-width: 1024px) {
+  .wrapper-about { margin-bottom: 120px; }
+  .about-me-text { max-width: 980px; margin-left: auto; margin-right: auto; }
+}
