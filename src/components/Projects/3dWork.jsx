@@ -4,6 +4,8 @@ import { EffectComposer, Bloom, ChromaticAberration, Vignette } from "@react-thr
 import * as THREE from "three";
 import { useRef } from "react";
 
+import myWorkUrl from "./assets/my-work.png";
+
 export default function ProjectorScene() {
   return (
     <Canvas
@@ -95,7 +97,7 @@ function Projector() {
 }
 
 function Screen() {
-  const texture = useLoader(THREE.TextureLoader, "/my-work.png");
+  const texture = useLoader(THREE.TextureLoader, myWorkUrl);
 
   return (
     <mesh position={[0, 2, -1]} receiveShadow>
