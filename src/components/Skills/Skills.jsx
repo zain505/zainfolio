@@ -151,6 +151,7 @@ export default function Hero() {
                       left: `${p.left}px`,
                       position: "absolute",
                       whiteSpace: "nowrap",
+                      border:"1px solid red"
                     }}
                   >
                     {p.title}

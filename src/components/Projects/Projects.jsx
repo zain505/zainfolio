@@ -5,7 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
-import ProjectorScene from "./3dWork"
+// import ProjectorScene from "./3dWork"
 
 import Git from "../../assets/git.png"
 
@@ -126,7 +126,7 @@ export default function Projects() {
 
                     </div>
                     <p className='think-design-develop'>think. design. develop..!</p>
-                    <ProjectorScene />
+                    {/* <ProjectorScene /> */}
                     <div className='content-project'>
 
                         {Projects.map(p => (
