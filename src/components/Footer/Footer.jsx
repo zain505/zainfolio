@@ -30,7 +30,7 @@ export default function Footer() {
                         Hire Me!
                     </a>
 
-                    <a className="siteFooter__phone" href="tel:+421902468085">
+                    <a className="siteFooter__phone" href="tel:+923074029959">
                         <span className="siteFooter__phoneIcon" aria-hidden="true">
                             {/* simple phone icon */}
                             <svg viewBox="0 0 24 24" width="18" height="18">

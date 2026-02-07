@@ -65,7 +65,10 @@
   width: 100%;
   overflow: hidden;
   position: relative;
+  padding: 10px; /* <-- add */
+  box-sizing: border-box; /* <-- add */
 }
+
 
 .text {
   color: #00eaff;

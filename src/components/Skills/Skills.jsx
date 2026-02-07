@@ -2,10 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import "./Skills.css";
 
 export default function Hero() {
-  const staticMessage = "hello"
-    const openMyWhatsApp = () => {
-        window.open(`https://api.whatsapp.com/send?phone=+923074029959&text=${staticMessage}`, "_blank");
-    }
+  const staticMessage = "hello";
+  const openMyWhatsApp = () => {
+    window.open(
+      `https://api.whatsapp.com/send?phone=+923074029959&text=${staticMessage}`,
+      "_blank"
+    );
+  };
+
   const skills = [
     { title: "React.js" },
     { title: "JavaScript" },
@@ -54,19 +58,18 @@ export default function Hero() {
   ];
 
   const [pickedItems, setPickedItems] = useState([]);
-
-  // keep rectangles in a ref so they persist across re-renders without re-triggering effects
   const rectsRef = useRef([]);
 
-  // tweak these to match your actual flashed-area size/padding
-  const AREA = { width: 520, height: 320 };
+  // NEW: ref for the flashed area + dynamic area size
+  const areaRef = useRef(null);
+  const areaSizeRef = useRef({ width: 520, height: 320 });
+
   const PADDING = 10;
 
   const estimateRect = (title, top, left) => {
-    // crude but works well for monospace-ish / similar font sizes
-    const charW = 9; // px per character (adjust)
-    const h = 28;    // label height (adjust)
-    const w = Math.min(340, Math.max(60, title.length * charW + 18)); // + padding
+    const charW = 9;
+    const h = 28;
+    const w = Math.min(340, Math.max(60, title.length * charW + 18));
     return { top, left, right: left + w, bottom: top + h, w, h };
   };
 
@@ -74,8 +77,10 @@ export default function Hero() {
     !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom);
 
   const randomPos = (rectW, rectH) => {
-    const maxLeft = Math.max(PADDING, AREA.width - rectW - PADDING);
-    const maxTop = Math.max(PADDING, AREA.height - rectH - PADDING);
+    const { width, height } = areaSizeRef.current;
+
+    const maxLeft = Math.max(PADDING, width - rectW - PADDING);
+    const maxTop = Math.max(PADDING, height - rectH - PADDING);
 
     const left = Math.floor(Math.random() * (maxLeft - PADDING + 1)) + PADDING;
     const top = Math.floor(Math.random() * (maxTop - PADDING + 1)) + PADDING;
@@ -83,18 +88,30 @@ export default function Hero() {
     return { top, left };
   };
 
+  // NEW: keep area size in sync on load + resize
+  useEffect(() => {
+    const updateArea = () => {
+      if (!areaRef.current) return;
+      const r = areaRef.current.getBoundingClientRect();
+      areaSizeRef.current = {
+        width: Math.floor(r.width),
+        height: Math.floor(r.height),
+      };
+    };
+
+    updateArea();
+    window.addEventListener("resize", updateArea);
+    return () => window.removeEventListener("resize", updateArea);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       const randomItem = skills[Math.floor(Math.random() * skills.length)];
-
       let placed = null;
 
-      // try multiple times to find a non-overlapping spot
       for (let tries = 0; tries < 40; tries++) {
-        // first estimate size at any position, then compute a valid random position
         const tempRect = estimateRect(randomItem.title, 0, 0);
         const { top, left } = randomPos(tempRect.w, tempRect.h);
-
         const rect = estimateRect(randomItem.title, top, left);
 
         const collision = rectsRef.current.some((r) => intersects(rect, r));
@@ -104,19 +121,15 @@ export default function Hero() {
         }
       }
 
-      // if we couldn't place without overlap, just skip this tick
       if (!placed) return;
 
       setPickedItems((prev) => {
         const updated = [...prev, placed];
-
         const maxLength = 5;
+
         if (updated.length > maxLength) {
           const removed = updated.shift();
-          // remove its rect from ref too
-          rectsRef.current = rectsRef.current.filter(
-            (r) => r !== removed._rect
-          );
+          rectsRef.current = rectsRef.current.filter((r) => r !== removed._rect);
         }
 
         rectsRef.current = [...rectsRef.current, placed._rect];
@@ -138,10 +151,17 @@ export default function Hero() {
         <div className="inner-wrapper-skills">
           <p className="skills">Skills</p>
           <hr className="neon-line" />
+
           <div className="content-skills">
             <div className="code-robot" onClick={clearAll} />
+
             <div className="flashing-skills-area">
-              <div className="flashed-area" style={{ position: "relative" }}>
+              {/* add ref here */}
+              <div
+                ref={areaRef}
+                className="flashed-area"
+                style={{ position: "relative" }}
+              >
                 {pickedItems.map((p, i) => (
                   <span
                     key={`${p.title}-${i}`}
@@ -151,7 +171,7 @@ export default function Hero() {
                       left: `${p.left}px`,
                       position: "absolute",
                       whiteSpace: "nowrap",
-                      border:"1px solid red"
+                      padding:"5px"
                     }}
                   >
                     {p.title}
@@ -160,8 +180,9 @@ export default function Hero() {
               </div>
             </div>
           </div>
+
           <a onClick={openMyWhatsApp} href="#" className="hire-me">
-            Awesome? Hire me! 
+            Awesome? Hire me!
           </a>
         </div>
       </div>

@@ -172,7 +172,7 @@ function NeuralNetwork() {
 
 export default function NeuraNetwork() {
   return (
-    <Canvas camera={{ position: [0, 0, 20] }}>
+    <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>
       <NeuralNetwork />
       <OrbitControls />
     </Canvas>
